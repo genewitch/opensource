@@ -1,7 +1,3 @@
-# opensource
-
-#gentoo < maolang >
-{
-make alias ='inhere'
-qlop -t $(qlist -IC) | sort -nk2 }
-
+# opensource code snippets and software
+contributor/producer
+IRC: #gentoo < maolang >
