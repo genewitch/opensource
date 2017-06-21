@@ -1,0 +1,157 @@
+ ls
+ cd llvm_mode/
+ make
+ clang
+ apt install clang
+ sudo apt install clang
+ clang
+ make
+ ls
+ cd ..
+ ls
+ cd ..
+ ls
+ mv afl-latest.tgz afl-2.43b/
+ ls
+ wget https://github.com/rc0r/afl-utils/archive/master.zip
+ unzip master.zip
+ sudo apt install unzip
+ unzip master.zip
+ cd afl-utils-master/
+ ls
+ less README.md
+ less docs/INSTALL.md
+ python setup.py install
+ sudo apt install python3.4
+ sudo apt install python-3.4
+ sudo apt install python
+ sudo apt install python3
+ python3 setup.py install
+ apt search setuptools
+ sudo apt install python3-setuptools
+ python setup.py install
+ python3 setup.py install
+ sudo python3 setup.py install
+ ls
+ afl-multicore
+ afl-multicore -h
+ ls
+ cd afl_utils
+ ls
+ cd ..
+ ls
+ cd test
+ cd tests
+ ls
+ python test_afl_multicore.py
+ cd ..
+ cd testdata/
+ ls
+ less afl-multicore.conf.test
+ cd
+ cd app
+ mkdir tools
+ cd tools
+ nano afl-launch.go
+ ./afl-launch
+ ./afl-launch.go
+ chmod +x afl-launch.go
+ ./afl-launch.go\
+ ./afl-launch.go
+ less afl-launch.go
+ sudo apt install go
+ cd
+ wget https://storage.googleapis.com/golang/go1.8.3.linux-amd64.tar.gz
+ tar zxvf go1.8.3.linux-amd64.tar.gz
+ cd go
+ ls
+ cd bin
+ ls
+ ccccccccccccccccccc
+ cd
+ cd app/tools/
+ ls
+ /home/ubuntu/go/bin/go afl-launch.go
+ cd
+ ls
+ rm -rf go
+ sudo tar -C /usr/local -xzf go1.8.3.linux-amd64.tar.gz
+ go
+ whereis go
+ go
+ export PATH=$PATH:/usr/local/go/bin
+ nano .profile
+ source /etc/profile
+ where go
+ go
+ cd app/tools/
+ go afl-launch.go
+ rm afl-launch.go
+ go get -u github.com/bnagy/afl-launch
+ ls
+ ls -al
+ sudo go get -u github.com/bnagy/afl-launch
+ sudo source /etc/profile
+ sudo . /etc/profile
+ afl-launch
+ nano main.go
+ go main.go
+ go -h
+ go build main.go
+ ls
+ rm main
+ mv main.go afl-launch
+ mv afl-launch afl-launch.go
+ go build afl-launch.go
+ ls
+ ./afl-launch
+ cd ..
+ tools/afl-launch -i in/ -o out/ -t25 -m10 -n 16 -T "gnu gmake fuzz x16 " -- bin/make -f @@
+ tools/afl-launch -i in/ -o out/ -t 25 -m 10 -n 16 -T "gnu gmake fuzz x16 " -- bin/make -f @@
+ tools/afl-launch -i in/ -o out/ -t 25 -m 10 -n 16 -- bin/make -f @@
+ ps aux
+ top
+ afl-fuzz -i in/ -o out/ -t 25 -m 10 -n 16 -- bin/make -f @@
+ sudo su
+ afl-fuzz -i in/ -o out/ -t 25 -m 10 -n 16 -- bin/make -f @@
+ sudo su
+ afl-fuzz -i in/ -o out/ -t 25 -m 10 -n 16 -- bin/make -f @@
+ nano in/Makefile
+ afl-fuzz -i in/ -o out/ -t 25 -m 10 -n 16 -- bin/make -f @@
+ afl-fuzz -i in/ -o out/ -t 25 -m 10 -- bin/make -f @@
+ tools/afl-launch -i in/ -o out/ -t 25 -m 10 -n 16 -- bin/make -f @@
+ top
+ afl-whatsup
+ ls
+ cd out/
+ ls
+ afl-whatsup .
+ afl-whatsup
+ afl-whatsup -s .
+ pkill afl*
+ ls
+ top
+ rm -rf *
+ ls
+ ls -al
+ cd ..
+ ls
+ ls -al
+ tools/afl-launch -i in/ -o out/ -t 25 -m 10 -n 16 -- bin/make -f @@
+ to
+ top
+ afl-whatsup out/
+ afl-whatsup out/ >../afl-whatsup.out
+ less ../afl-whatsup.out
+ afl-whatsup out/ |tail -n11
+ watch -n2 'afl-whatsup out/ |tail -n11'
+ afl-gotcpu
+ afl-stats
+ du -sh out/
+ ls
+ ls /
+ ls /home
+ ls /home/ubuntu/
+ ls
+ watch -n2 'afl-whatsup out/ |tail -n11'
+ history >../history
