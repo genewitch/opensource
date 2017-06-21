@@ -1,0 +1,1 @@
+~/afl/bin/afl-launch -i ~/afl/app/in/ -o ~/afl/app/out/ -m none -t 25 -n 8  -- ~/afl/app/bin/make -f @@
