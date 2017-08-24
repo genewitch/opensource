@@ -14,7 +14,7 @@
 #
 
 mvn exec:java -pl \
-/hbc-example \
+hbc-example \
 -Dconsumer.key=secret \
 -Dconsumer.secret=secret \
 -Daccess.token=secret \
