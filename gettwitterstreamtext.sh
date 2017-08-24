@@ -2,9 +2,9 @@
 #
 # assuming prior to first run:
 # you've installed git, and jq https://stedolan.github.io/jq/
-# $ mkdir twitter && cd twitter
-# $ git clone https://github.com/twitter/hbc.git 
-# $cd hbc && mvn install
+#   $ mkdir twitter && cd twitter
+#   $ git clone https://github.com/twitter/hbc.git 
+#   $cd hbc && mvn install
 # 
 # edit this script with the twitter dev API keys in your "my apps" section
 #
@@ -22,10 +22,10 @@ hbc-example \
 > twitter.json
 
  tail -n2008 twitter.json \
-|head -n2000 \
-|  jq .text  \
+| head -n2000 \
+| jq .text  \
 | sed 's/\x00//g' \
-|grep -v t.co \
-|grep -P -v "[^\x01-\x7F]" \
+| grep -v t.co \
+| grep -P -v "[^\x01-\x7F]" \
 | grep -v null \
 >> ../twitter.text.txt
