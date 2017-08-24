@@ -1,9 +1,10 @@
 #!/bin/bash
 #
 # assuming prior to first run:
+# you've installed git, and jq https://stedolan.github.io/jq/
 # $ mkdir twitter && cd twitter
-# $ git clone https://github.com/twitter/hbc.git
-# cd hbc
+# $ git clone https://github.com/twitter/hbc.git 
+# $cd hbc && mvn install
 # 
 # edit this script with the twitter dev API keys in your "my apps" section
 #
