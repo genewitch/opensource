@@ -11,14 +11,14 @@ while True:
     i, = struct.unpack('h', sys.stdin.buffer.read(2))
     j, = struct.unpack('h', sys.stdin.buffer.read(2))
     k, = struct.unpack('h', sys.stdin.buffer.read(2))
-      if i == j or i == k or k == j:
-        continue
-        elif (j - i) < (j - k):
-          print("1", end="")
-        elif (j - i) > (j - k):
-          print("0", end="")
-        else:
-          continue
+    if i == j or i == k or k == j:
+      continue
+    elif (j - i) < (j - k):
+      print("1", end="")
+    elif (j - i) > (j - k):
+      print("0", end="")
+    else:
+      continue
 
 #  print(i, end=",")
 #  ar =  np.append(ar,i)
