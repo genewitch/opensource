@@ -1,36 +1,38 @@
+# input to stdin signed int16 between -4096 and 4096
+
 import sys
 import numpy as np
 import struct
-#even = True
-#with open("rndbits", "rb") as f:
-#ar = np.empty(1, dtype="int16")
 
 while True:
-  #c = f.read(2)
-  for bit in range (1,9):
+  
+  bild = []
+  while len(bild) < 8:
+    #get three int16s in a row
     i, = struct.unpack('h', sys.stdin.buffer.read(2))
     j, = struct.unpack('h', sys.stdin.buffer.read(2))
     k, = struct.unpack('h', sys.stdin.buffer.read(2))
+    
     if i == j or i == k or k == j:
+      #just drop all three if they're equal
       continue
+      
     elif (j - i) < (j - k):
-      print("1", end="")
+      bild.append('1')
+      #print("1", end="")
+    
     elif (j - i) > (j - k):
-      print("0", end="")
+      bild.append('0')
+      #print("0", end="")
+    
     else:
       continue
-
-#  print(i, end=",")
-#  ar =  np.append(ar,i)
-#  if ar.size % 1000 == 0:
-#    sys.stderr.write(str(np.median(ar)))
-#    sys.stderr.write("\n")
-#    sys.stderr.write(str(np.mean(ar)))
-#    sys.stderr.write("\n")
-#    sys.stderr.flush()
-#s = sys.stdin.read(2)
-#a = np.loadtxt(s, dtype=np.int16)
-#print (np.median(a))
-#print (np.mean(a))
-#print (np.amin(a))
-#print (np.amax(a))
+  
+  outa = ''.join(bild)
+  outi = int(outa,2)
+  outb = outi.to_bytes(1,byteorder="little",signed=False)
+  
+  #this is outputting stuff like "b'n'b'F'b'N'b'\xbc'b'\x83'b'\xaa'b'\xfb'"
+  #i want it to output raw bytes, no formatting or anything
+  print( outb, end="")
+  
