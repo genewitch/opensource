@@ -14,7 +14,8 @@ if substring not in query.lower():
     query="1d6"
 else:
     rolls = query.lower().split('d')
-
+    if rolls[0] == '':
+        rolls[0] = 1
 #query="2d20"
 min = 1
 b = 6
