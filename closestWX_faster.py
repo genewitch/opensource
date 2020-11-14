@@ -33,6 +33,7 @@ for row in iter_row(zonescursor):
 	tmpcall,tmpdist = stationscursor.fetchall()[0]
 	closeststation[3] = tmpdist
 	closeststation[4] = tmpcall
+	# Obviously run this as whatever.py > wxreduce.out to use with my other python that outputs weather from aprs.fi
 	print(closeststation)
 
 	stationscursor.close()
