@@ -11,6 +11,8 @@ or you can pipe / use stdin:
 either way works. once this has given you output,
 echo the output and append to your file:
         echo "whatever the nonce is" >> somefile.txt
+or:
+python sha256pad.py somefile.txt >> somefile.txt
 then:
         sha256sum somefile.txt
 the output of that should start with however many zeros
@@ -44,4 +46,4 @@ while not (summer.hexdigest().startswith(leftpad)):
         nonce += "\n"
         summer.update(nonce.encode('utf-8'))
 
-print(nonce +" | "+ summer.hexdigest())
+print(nonce,end='')
