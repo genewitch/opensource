@@ -2,6 +2,26 @@ import fileinput
 import hashlib
 import random
 
+''' 
+in python you can put filepath on the command line:
+        python sha256pad.py somefile.txt
+or you can pipe / use stdin:
+        echo "foobar" | python sha256pad.py
+
+either way works. once this has given you output,
+echo the output and append to your file:
+        echo "whatever the nonce is" >> somefile.txt
+then:
+        sha256sum somefile.txt
+the output of that should start with however many zeros
+specified in "difficulty" variable.
+
+#warning: difficulty > 5 will take a while
+#todo: threads, hopefully
+#todo: scryptpad
+#todo: command line switches like -d[iff[iculty]]
+'''
+        
 file = fileinput.input(mode='rb')
 precursor = hashlib.sha256()
 
