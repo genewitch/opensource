@@ -35,7 +35,7 @@ nonce =''
 noncelength = 8
 noncemagic = '%0' +str(noncelength) +'x'
 
-difficulty = 6
+difficulty = 5
 leftpad =''
 for x in range(1,difficulty+1):
         leftpad += "0"
