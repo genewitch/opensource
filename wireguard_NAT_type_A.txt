@@ -40,11 +40,40 @@ So here's what i did.
 	Address = 192.168.2.1
 	PrivateKey = server private key (copy and paste)
 	ListenPort = 51820
-	PostUp = iptables -t nat -A PREROUTING -p udp -i enp0s18 '!' --dport 22 -j DNAT --to-destination 192.168.2.69; iptables -t nat -A PREROUTING -p tcp -i enp0s18 '!' --dport 22 -j DNAT --to-destination 192.168.2.69; iptables -t nat -A POSTROUTING -o enp0s18 -j SNAT --to-source 172.83.201.19
-	PostDown = iptables -t nat -A PREROUTING -p udp -i enp0s18 '!' --dport 22 -j DNAT --to-destination 192.168.2.69; iptables -t nat -D PREROUTING -p tcp -i enp0s18 '!' --dport 22 -j DNAT --to-destination 192.168.2.69; iptables -t nat -D POSTROUTING -o enp0s18 -j SNAT --to-source 172.83.201.19
+	PostUp = iptables -t nat -A PREROUTING -p udp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -A PREROUTING -p tcp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source SERVER-PUBLIC-IP
+	PostDown = iptables -t nat -A PREROUTING -p udp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.69; iptables -t nat -D PREROUTING -p tcp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -D POSTROUTING -o eth0 -j SNAT --to-source SERVER-PUBLIC-IP
 	
 	[Peer]
 	PublicKey = client public key (copy and paste)
 	AllowedIPs = 192.168.2.0/24
 	
+16) edit the above to copy and paste your server's private key and client public key where they go, and to edit "eth0" and the SERVER-PUBLIC-IP to the correct values.
+17) save this (ctrl-o, ctrl-x)
+18) try: sudo wg-quick up wg0
+19) if that works, you're done on the server side, if not, you made a typo or something. It will usually say iptables (legacy) ERROR MESSAGE if you made a typo somewhere.
+20) go onto your router (or whatever) with wireguard client, log in and set it up:
+  interface:
+	IP Address: 192.168.2.2
+	private key: paste the client private key here
+	listen port: 51820
+	dns: 1.1.1.1 (or whatever you want to use - it can't use your existing ones, so you have to put something here)
+	MTU: default i guess?
+  peer:	
+	public key: paste your server public key here
+	endpoint host: paste your server ip, then a colon, then 51820, e.g. 55.55.55.55:51820
+	allowed ips: 0.0.0.0/0  this is important, it forwards ALL traffic through wireguard!
+	keepalive: 25   I have to set this due to weirdness on my end, but 25 is recommended, or 0 for "off"
+21) save/apply/whatever
+22) connect your switch to your gl.inet or whatever has wireguard on it.
+23) go to firewall and port forwarding, and add a rule:
+	Forward 1-65535 from wireguard interface to the switch IP address port 1-65535
+24) save the rule.
+25) turn the wireguard connection ON.
+26) ideally, at least on the gl.inet, you want to enable "internet kill switch" which blocks all traffic in and out of the WAN and forces everything to use the wireguard interface instead.
+27) on your nintendo (or whatever) reconnect to your gl.inet wifi. Test connection after it connects.
+	the IP shown should be the SERVER IP
+	the NAT type should be "A"
+	speed test should be "garbage"
+28) you're done.
 
+I hope this helps. this is mostly to document the changes i had to make with very specific hardware (and gentoo). I may or may not edit this.
