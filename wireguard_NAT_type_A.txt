@@ -13,11 +13,10 @@ So maybe we can use free tier of AWS, google cloud, or azure to get a public IP,
 turns out, YES! with NAT type *A*!
 
 i used several articles as a base:
-https://www.stavros.io/posts/how-to-configure-wireguard/ this was how i originally set up the client and the server.
-https://www.purevpn.com/port-forwarding/diablo-iii this says that diablo III (and the switch in general) needs *all* UDP ports fwd
-https://github.com/xiahualiu/wg_gaming_installer/blob/main/wg-gaming-installer.sh This gave me an idea that i could try full cone
-https://jramtech.gitlab.io/post/getting-over-cgnat-wireguard-gce/ this was the next to last article i found, and this NEARLY fixed it!
-Unfortunately i lost the reddit link that explained you "don't need DMZ, just to forward all UDP ports".
+https://www.stavros.io/posts/how-to-configure-wireguard/ | http://fileserv.projectftm.com/9e1fcb.png this was how i originally set up the client and the server.
+https://www.purevpn.com/port-forwarding/diablo-iii | http://fileserv.projectftm.com/2a4e78.png this says that diablo III (and the switch in general) needs *all* UDP ports fwd
+https://github.com/xiahualiu/wg_gaming_installer/blob/main/wg-gaming-installer.sh | http://fileserv.projectftm.com/c5ea46.png This gave me an idea that i could try full cone
+https://jramtech.gitlab.io/post/getting-over-cgnat-wireguard-gce/ | http://fileserv.projectftm.com/c4fb34.png this was the next to last article i found, and this NEARLY fixed it!
 
 So here's what i did. 
 
