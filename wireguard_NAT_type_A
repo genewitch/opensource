@@ -1,0 +1,18 @@
+I have a gl.inet mango travel router with wireguard and ovpn clients and servers, as well as full WRT functionality.
+I also have access to VMs with public IPs.
+I am behind CGNAT with every ISP i have (three total right now, we'll see what starlink has - probably CGNAT as well)
+when i want to host a game on nintendo switch or whatever, people cannot join because i am NAT type B or worse -
+i've seen nat type F which means no peer to peer games at all, even if i want to connect to them!
+
+So there's a few ways around this. There's Connectify for windows, which will make a hotspot using a wifi card or dongle. Then you need
+Speedify as well, or any "gaming VPN" service, speedify is integrated with connectify, so i tried that.
+That worked pretty well, but it costs money.
+I also have access to a full cone NAT via a fortigate VPN server, but fortigates are expensive, and you have to have a place to put them.
+So maybe we can use free tier of AWS, google cloud, or azure to get a public IP, and route everything the switch does through it?
+
+turns out, YES! with NAT type *A*!
+
+i used several articles as a base:
+https://www.stavros.io/posts/how-to-configure-wireguard/ this was how i originally set up the client and the server.
+https://www.purevpn.com/port-forwarding/diablo-iii this says that diablo III (and the switch in general) needs *all* UDP ports fwd
+https://github.com/xiahualiu/wg_gaming_installer/blob/main/wg-gaming-installer.sh This gave me an idea that i could try full cone
