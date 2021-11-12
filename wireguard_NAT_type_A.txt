@@ -44,7 +44,7 @@ So here's what i did.
 	PrivateKey = server private key (copy and paste)
 	ListenPort = 51820
 	PostUp = iptables -t nat -A PREROUTING -p udp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -A PREROUTING -p tcp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to-source SERVER-PUBLIC-IP
-	PostDown = iptables -t nat -A PREROUTING -p udp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.69; iptables -t nat -D PREROUTING -p tcp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -D POSTROUTING -o eth0 -j SNAT --to-source SERVER-PUBLIC-IP
+	PostDown = iptables -t nat -A PREROUTING -p udp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -D PREROUTING -p tcp -i eth0 '!' --dport 22 -j DNAT --to-destination 192.168.2.2; iptables -t nat -D POSTROUTING -o eth0 -j SNAT --to-source SERVER-PUBLIC-IP
 	
 	[Peer]
 	PublicKey = client public key (copy and paste)
