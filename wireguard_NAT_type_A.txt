@@ -50,10 +50,12 @@ So here's what i did.
 	PublicKey = client public key (copy and paste)
 	AllowedIPs = 192.168.2.0/24
 	
-16) edit the above to copy and paste your server's private key and client public key where they go, and to edit "eth0" and the SERVER-PUBLIC-IP to the correct values.
+16) edit the above to copy and paste your server's private key and client public key where they go, and to edit "eth0" and the SERVER-PUBLIC-IP 
+	to the correct values.
 17) save this (ctrl-o, ctrl-x)
 18) try: sudo wg-quick up wg0
-19) if that works, you're done on the server side, if not, you made a typo or something. It will usually say iptables (legacy) ERROR MESSAGE if you made a typo somewhere.
+19) if that works, you're done on the server side, if not, you made a typo or something. It will usually say iptables (legacy) ERROR MESSAGE 
+	if you made a typo somewhere.
 20) go onto your router (or whatever) with wireguard client, log in and set it up:
   interface:
 	IP Address: 192.168.2.2
@@ -72,11 +74,13 @@ So here's what i did.
 	Forward 1-65535 from wireguard interface to the switch IP address port 1-65535
 24) save the rule.
 25) turn the wireguard connection ON.
-26) ideally, at least on the gl.inet, you want to enable "internet kill switch" which blocks all traffic in and out of the WAN and forces everything to use the wireguard interface instead.
+26) ideally, at least on the gl.inet, you want to enable "internet kill switch" which blocks all traffic in and out of the WAN and forces 
+	everything to use the wireguard interface instead.
 27) on your nintendo (or whatever) reconnect to your gl.inet wifi. Test connection after it connects.
 	the IP shown should be the SERVER IP
 	the NAT type should be "A"
 	speed test should be "garbage"
 28) you're done.
 
-I hope this helps. this is mostly to document the changes i had to make with very specific hardware (and gentoo). I may or may not edit this.
+I hope this helps. this is mostly to document the changes i had to make with very specific hardware (and gentoo). 
+	I may or may not edit this.
