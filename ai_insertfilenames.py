@@ -13,7 +13,6 @@ files = [f for f in os.listdir(directory_path) if os.path.isfile(os.path.join(di
 
 # Check if each filename exists in the "filenames" table before inserting it
 for file in files:
-    print("in loop")
     c.execute("SELECT COUNT(*) FROM filenames WHERE filename=?", (file,))
     result = c.fetchone()
     num_rows = result[0]
@@ -21,7 +20,6 @@ for file in files:
     # If the filename doesn't exist, insert it into the "filenames" table
     if num_rows == 0:
         c.execute("INSERT INTO filenames (filename) VALUES (?)", (file,))
-        print(file)
-        
+               
 conn.commit()
 conn.close()
