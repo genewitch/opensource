@@ -1,0 +1,13 @@
+  test.mysite.com:80
+
+  ext .html
+
+  errors error.log {
+      404 error-404.html
+  }
+
+  log /home/caddy/caddyserver/access.log
+
+  cgi /get-log /home/caddy/caddyserver/get_log.py
+
+  rewrite .* /get-log
