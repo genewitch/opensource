@@ -1,0 +1,33 @@
+how the pastebin was run;
+start a fresh old ubuntu release that you can get these packages to work on (lol)
+it sets up a 200MB ramdisk at /mnt/knoxious, we install nodejs npm
+we get the actual pastebin from github (Up1)
+
+So we're in the homedir ~/ and we manipulate the downloaded Up1 directory 
+directly. we tell node package manager to make sure all packages are installed.
+
+Now we're done. You can reboot and then write the bash script
+and tell it to run on boot.
+Since we told linux to always make a 200MB ramdisk on boot, we can
+rsync with preserved permissions
+chdir to the nodejs server folder (that we rsync'd)
+and then nohangup & the invocation so that we don't need to ever be around.
+
+echo "tmpfs /mnt/knoxious      tmpfs   size=200M,mode=0755     0       0" > /etc/fstab
+mkdir /mnt/knoxious
+mount -a
+apt install nodejs npm
+apt-get install nodejs
+git clone https://github.com/Upload/Up1
+cd Up1
+cp server/server.conf.example server/server.conf #and edit api_key
+cp client/config.js.example client/config.js     #and copy the api_key
+cd server
+npm install
+
+#!/bin/bash
+rsync -avz /home/ubuntu/Up1/ /mnt/knoxious
+#chown -R www-data.www-data /mnt/knoxious/
+#service nginx restart
+cd /mnt/knoxious/server
+nohup nodejs server.js &
