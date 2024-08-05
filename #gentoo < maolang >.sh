@@ -1,7 +1,7 @@
 #gentoo
  gcc -march=native -E -v - </dev/null 2>&1 | grep cc1
-@output eg:
-@`
+#output eg:
+#`
 COMMON_FLAGS="-O2 -march=bonnell \
 -mmmx -mno-popcnt -msse -msse2 -msse3 -mssse3 \
 -mno-sse4.1 -mno-sse4.2 -mno-avx -mno-avx2 -mno-sse4a -mno-fma4 \
