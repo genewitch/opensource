@@ -1,4 +1,4 @@
-# i had to fix a lot 
+# i had to fix a lot and this does not check input
 # i am debating trying to make it faster without being
 # clever
 import pygame
@@ -9,7 +9,7 @@ import numbers
 pygame.init()
 oneD = []
 lineOut = []
-w, h = 1024, 800
+w, h = 1021, 800
 ScrSize = (w, h)
 Gray = (200, 200, 200)
 screen = pygame.display.set_mode(ScrSize)
@@ -34,18 +34,20 @@ def get_input_num():
                 if event.key == pygame.K_RETURN:
                     
                     try:
-                        if isinstance(int(user_input), numbers.Integral) and int(user_input) >=0:
+                        value = int(user_input)
+                        if value >= 0:
                             input_active = False
-                            return int(user_input)
+                            return value
                         else:
                             user_input = ""
+                            break
                     except ValueError:
                         user_input = ""
                         break
                     except TypeError:
                         user_input = ""
                         break
-
+    
                 elif event.key == pygame.K_BACKSPACE:
                     user_input = user_input[:-1]
                 else:
