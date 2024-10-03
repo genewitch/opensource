@@ -1,4 +1,4 @@
-# i had to fix a lot
+# i had to fix a lot 
 # i am debating trying to make it faster without being
 # clever
 import pygame
@@ -99,6 +99,9 @@ while running:
                     rules = int_to_binary_list(input_num, 8)
                     reset_world()
                     print("reset to rule #" + str(input_num))
+                    break
+                elif event.key == pygame.K_r:
+                    reset_world()
                     break
 
         for row in range(0, h):
