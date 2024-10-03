@@ -34,6 +34,7 @@ def get_input_num():
                     input_active = False
                     try: 
                         return int(user_input)
+                    #DURR HURR EXCEPT NEGATIVE INTEGERS BECAUSE DURRRRRRR    
                     except ValueError:
                         continue
                 elif event.key == pygame.K_BACKSPACE:
