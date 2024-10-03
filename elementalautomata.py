@@ -1,4 +1,4 @@
-# i had to fix a lot and this does not check input
+# i had to fix a lot
 # i am debating trying to make it faster without being
 # clever
 import pygame
