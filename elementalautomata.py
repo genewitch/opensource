@@ -1,14 +1,15 @@
-# i had to fix a lot and this does not check input
+# i had to fix a lot 
 # i am debating trying to make it faster without being
 # clever
 import pygame
 from secrets import randbelow
 import sys
+import numbers
 
 pygame.init()
 oneD = []
 lineOut = []
-w, h = 480, 270
+w, h = 1024, 800
 ScrSize = (w, h)
 Gray = (200, 200, 200)
 screen = pygame.display.set_mode(ScrSize)
@@ -31,13 +32,20 @@ def get_input_num():
                 sys.exit()
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
-                    input_active = False
-                    try: 
-                        return int(user_input)
-                    # will crash on negatives but why use them?
-                    # and i don't want to fix it
+                    
+                    try:
+                        if isinstance(int(user_input), numbers.Integral) and int(user_input) >=0:
+                            input_active = False
+                            return int(user_input)
+                        else:
+                            user_input = ""
                     except ValueError:
-                        continue
+                        user_input = ""
+                        break
+                    except TypeError:
+                        user_input = ""
+                        break
+
                 elif event.key == pygame.K_BACKSPACE:
                     user_input = user_input[:-1]
                 else:
@@ -94,21 +102,22 @@ while running:
 
         for row in range(0, h):
             for t in range(1, w+1):
-                if oneD[t-1:t+2] == [1, 1, 1]:
+                testee = oneD[t-1:t+2]
+                if testee == [1, 1, 1]:
                     lineOut[t] = rules[0]
-                elif oneD[t-1:t+2] == [1, 1, 0]:
+                elif testee == [1, 1, 0]:
                     lineOut[t] = rules[1]
-                elif oneD[t-1:t+2] == [1, 0, 1]:
+                elif testee == [1, 0, 1]:
                     lineOut[t] = rules[2]
-                elif oneD[t-1:t+2] == [1, 0, 0]:
+                elif testee == [1, 0, 0]:
                     lineOut[t] = rules[3]
-                elif oneD[t-1:t+2] == [0, 1, 1]:
+                elif testee == [0, 1, 1]:
                     lineOut[t] = rules[4]
-                elif oneD[t-1:t+2] == [0, 1, 0]:
+                elif testee == [0, 1, 0]:
                     lineOut[t] = rules[5]
-                elif oneD[t-1:t+2] == [0, 0, 1]:
+                elif testee == [0, 0, 1]:
                     lineOut[t] = rules[6]
-                elif oneD[t-1:t+2] == [0, 0, 0]:
+                elif testee == [0, 0, 0]:
                     lineOut[t] = rules[7]
                 else:
                     print("BONKERS")
