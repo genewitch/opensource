@@ -125,7 +125,7 @@ while running:
 
             scroll_world()
         
-        screen.blit(world, (0, 0))
-        pygame.display.update()
+            screen.blit(world, (0, 0))
+            pygame.display.update()
         
 pygame.quit()
