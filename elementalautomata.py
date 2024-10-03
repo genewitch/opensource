@@ -12,7 +12,7 @@ w, h = 640, 640
 ScrSize = (w, h)
 Gray = (200, 200, 200)
 screen = pygame.display.set_mode(ScrSize)
-pygame.display.set_caption("Scrolling Lines")
+pygame.display.set_caption("Elementary Cellular Automaton")
 world = pygame.Surface((ScrSize[0], ScrSize[1]))
 world.fill(Gray)
 font = pygame.font.Font(None, 36)
