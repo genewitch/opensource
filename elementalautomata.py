@@ -34,7 +34,8 @@ def get_input_num():
                     input_active = False
                     try: 
                         return int(user_input)
-                    #DURR HURR EXCEPT NEGATIVE INTEGERS BECAUSE DURRRRRRR    
+                    # will crash on negatives but why use them?
+                    # and i don't want to fix it
                     except ValueError:
                         continue
                 elif event.key == pygame.K_BACKSPACE:
