@@ -23,6 +23,8 @@ def get_input_num():
 
     while input_active:
         screen.fill((0, 0, 0))
+
+        
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -30,11 +32,15 @@ def get_input_num():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     input_active = False
+                    try: 
+                        return int(user_input)
+                    except ValueError:
+                        continue
                 elif event.key == pygame.K_BACKSPACE:
                     user_input = user_input[:-1]
                 else:
                     user_input += event.unicode
-
+    
         # Render input text
         prompt = font.render("Enter a rule number:", True, (255, 255, 255))
         screen.blit(prompt, (20, 20))
@@ -42,7 +48,7 @@ def get_input_num():
         screen.blit(input_box, (300, 20))
         pygame.display.flip()
     
-    return int(user_input)
+
 
 # Function to convert integer to binary list
 def int_to_binary_list(n, length=8):
@@ -76,11 +82,12 @@ while running:
                 if event.key == pygame.K_q:
                     running = False
                 elif event.key == pygame.K_n:
-                    print("caught 'n'")
+                    #print("caught 'n'")
                     
                     input_num = get_input_num()
                     rules = int_to_binary_list(input_num, 8)
                     reset_world()
+                    print("reset to rule #" + str(input_num))
                     break
 
         for row in range(0, h):
