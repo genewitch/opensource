@@ -8,7 +8,7 @@ import sys
 pygame.init()
 oneD = []
 lineOut = []
-w, h = 640, 640
+w, h = 480, 270
 ScrSize = (w, h)
 Gray = (200, 200, 200)
 screen = pygame.display.set_mode(ScrSize)
