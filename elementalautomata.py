@@ -53,8 +53,15 @@ def get_input_num():
                     user_input += event.unicode
     
         # Render input text
-        prompt = font.render("Enter a rule number:", True, (255, 255, 255))
-        screen.blit(prompt, (20, 20))
+        pt = "Enter a rule number:\n"
+        pt += "While running:\n"
+        pt += "'R'estart   'N'umber\n"
+        lines = pt.split('\n')
+        y = 20
+        for line in lines:
+            prompt = font.render(line, True, (255, 255, 255))
+            screen.blit(prompt, (20, y))
+            y+=40
         input_box = font.render(user_input, True, (255, 255, 255))
         screen.blit(input_box, (300, 20))
         pygame.display.flip()
