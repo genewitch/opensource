@@ -33,11 +33,10 @@ def get_input_num():
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_RETURN:
                     
-                    try:
-                        value = int(user_input)
-                        if value >= 0:
+                    try:                        
+                        if int(user_input) >= 0:
                             input_active = False
-                            return value
+                            return int(user_input)
                         else:
                             user_input = ""
                             break
