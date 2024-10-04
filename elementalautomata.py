@@ -12,7 +12,7 @@ import math
 pygame.init()
 oneD = []
 lineOut = []
-w, h = 1021, 800
+w, h = 641, 360
 state = []
 history = 1
 linecount = 0
@@ -21,6 +21,7 @@ rules = []
 ScrSize = (w, h)
 Gray = (200, 200, 200)
 screen = pygame.display.set_mode((ScrSize), pygame.HWSURFACE|pygame.DOUBLEBUF)
+#screen = pygame.display.set_mode((ScrSize), pygame.SCALED, vsync=True)
 clock = pygame.time.Clock()  
 pygame.display.set_caption("Elementary Cellular Automaton")
 world = pygame.Surface((ScrSize[0], ScrSize[1]))
@@ -211,7 +212,7 @@ while running:
             if marker == 0:
                 marker = linecount                
             scrollinfo = font.render("non-uniqueness found at line: " + str(marker), True, (255, 255, 255))
-            screen.blit(scrollinfo, (w/2-60, h-40))
+            screen.blit(scrollinfo, (20, h-40))
             pygame.display.flip()
             
         scroll_world()    
