@@ -5,11 +5,14 @@ import pygame
 from secrets import randbelow
 import sys
 import numbers
+import base64
+import math
 
 pygame.init()
 oneD = []
 lineOut = []
 w, h = 1021, 800
+state = []
 ScrSize = (w, h)
 Gray = (200, 200, 200)
 screen = pygame.display.set_mode(ScrSize)
@@ -82,8 +85,57 @@ def scroll_world():
 def reset_world():
     global oneD, lineOut, world
     oneD = [randbelow(2) for _ in range(w + 2)]
+    seed = get_base64(oneD)
+    print("seed: " + seed)
     lineOut = [0 for _ in range(w + 2)]
     world.fill(Gray)
+
+def get_base64(blist):
+    binary_string = ''.join(map(str, blist))
+    binary_bytes = int(binary_string, 2).to_bytes((len(binary_string) + 7) // 8, byteorder='big')
+    # Encode the bytes to base64
+    base64_encoded = base64.b64encode(binary_bytes)
+    # Decode to get the string
+    base64_string = base64_encoded.decode('utf-8')
+    return base64_string
+    
+import math
+
+def custom_chisquare(observed, expected):
+    return sum((o - e) ** 2 / e for o, e in zip(observed, expected))
+
+def check_randomness(integers):
+    if not integers:
+        print("Empty list")
+        return
+
+    # Calculate observed frequencies
+    observed = [integers.count(i) for i in set(integers)]
+    total = sum(observed)
+    
+    # Calculate expected frequencies (assuming uniform distribution)
+    expected = [total / len(observed)] * len(observed)
+    
+    # Perform custom chi-square test
+    chi2 = custom_chisquare(observed, expected)
+
+    # Simple heuristic for p-value approximation (for small values of chi2, assume higher p-value)
+    p_value = math.exp(-0.5 * chi2)
+    
+    # If p-value is very low, it's not really random
+    if p_value < 0.05:
+        print("!r")
+    else:
+        print("R")
+
+def is_unique_list(new_list, seen_lists, h):
+    if new_list in seen_lists:
+        return False
+    if len(seen_lists) >= h:
+        seen_lists.pop(0)  # Remove the oldest list to maintain the size limit
+    seen_lists.append(new_list)
+    return True
+
 
 running = True
 while running:
@@ -142,7 +194,12 @@ while running:
             lineOut[0] = oneD[w]
             lineOut[w] = oneD[0]
             oneD = list(lineOut)
-
+            
+             #debug statement
+            #check_randomness(oneD)
+            if is_unique_list(oneD, state, h) == False:
+                print("non-uniq line found drrr")
+                
             scroll_world()
         
             screen.blit(world, (0, 0))
