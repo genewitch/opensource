@@ -198,8 +198,10 @@ while running:
              #debug statement
             #check_randomness(oneD)
             if is_unique_list(oneD, state, h) == False:
-                print("non-uniq line found drrr")
-                
+                #print("non-uniq line found drrr")
+                scrollinfo = font.render("non-uniqueness found", True, (255, 255, 255))
+                screen.blit(scrollinfo, (w/2-20, h-40))
+                pygame.display.flip()
             scroll_world()
         
             screen.blit(world, (0, 0))
