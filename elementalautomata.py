@@ -2,6 +2,7 @@
 # i am debating trying to make it faster without being
 # clever
 import pygame
+from pygame.locals import *
 from secrets import randbelow
 import sys
 import numbers
@@ -13,9 +14,14 @@ oneD = []
 lineOut = []
 w, h = 1021, 800
 state = []
+history = 1
+linecount = 0
+marker = 0
+rules = []
 ScrSize = (w, h)
 Gray = (200, 200, 200)
-screen = pygame.display.set_mode(ScrSize)
+screen = pygame.display.set_mode((ScrSize), pygame.HWSURFACE|pygame.DOUBLEBUF)
+clock = pygame.time.Clock()  
 pygame.display.set_caption("Elementary Cellular Automaton")
 world = pygame.Surface((ScrSize[0], ScrSize[1]))
 world.fill(Gray)
@@ -26,8 +32,8 @@ def get_input_num():
     input_active = True
 
     while input_active:
-        screen.fill((0, 0, 0))
-
+        
+        #screen.fill((0, 0, 0))        
         
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -83,7 +89,9 @@ def scroll_world():
     pygame.draw.line(world, Gray, (0, h - 1), (w, h - 1))
 
 def reset_world():
-    global oneD, lineOut, world
+    global oneD, lineOut, world, linecount, marker
+    linecount = 0
+    marker = 0
     oneD = [randbelow(2) for _ in range(w + 2)]
     seed = get_base64(oneD)
     print("seed: " + seed)
@@ -139,72 +147,78 @@ def is_unique_list(new_list, seen_lists, h):
 
 running = True
 while running:
-    input_num = get_input_num()
-    rules = int_to_binary_list(input_num, 8)
-    reset_world()
-    print("rule #" + str(input_num))
-    
-    while running:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
+    pause = False
+    if not rules:
+        pygame.event.post(pygame.event.Event(pygame.KEYDOWN, {"key": pygame.K_n}))
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            running = False
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_q:
                 running = False
-            elif event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_q:
-                    running = False
-                elif event.key == pygame.K_n:
-                    #print("caught 'n'")
-                    
-                    input_num = get_input_num()
-                    rules = int_to_binary_list(input_num, 8)
-                    reset_world()
-                    print("reset to rule #" + str(input_num))
-                    break
-                elif event.key == pygame.K_r:
-                    reset_world()
-                    break
-
-        for row in range(0, h):
-            for t in range(1, w+1):
-                testee = oneD[t-1:t+2]
-                if testee == [1, 1, 1]:
-                    lineOut[t] = rules[0]
-                elif testee == [1, 1, 0]:
-                    lineOut[t] = rules[1]
-                elif testee == [1, 0, 1]:
-                    lineOut[t] = rules[2]
-                elif testee == [1, 0, 0]:
-                    lineOut[t] = rules[3]
-                elif testee == [0, 1, 1]:
-                    lineOut[t] = rules[4]
-                elif testee == [0, 1, 0]:
-                    lineOut[t] = rules[5]
-                elif testee == [0, 0, 1]:
-                    lineOut[t] = rules[6]
-                elif testee == [0, 0, 0]:
-                    lineOut[t] = rules[7]
-                else:
-                    print("BONKERS")
-                    
-            for pixel in range(1, w):
-                if lineOut[pixel] == 1:
-                    world.set_at((pixel, h-1), (0, 0, 0))
-                else:
-                    world.set_at((pixel, h-1), (255, 255, 255))
-            
-            lineOut[0] = oneD[w]
-            lineOut[w] = oneD[0]
-            oneD = list(lineOut)
-            
-             #debug statement
-            #check_randomness(oneD)
-            if is_unique_list(oneD, state, h) == False:
-                #print("non-uniq line found drrr")
-                scrollinfo = font.render("non-uniqueness found", True, (255, 255, 255))
-                screen.blit(scrollinfo, (w/2-20, h-40))
-                pygame.display.flip()
-            scroll_world()
+            elif event.key == pygame.K_n:
+                #print("caught 'n'")
+                
+                input_num = get_input_num()
+                rules = int_to_binary_list(input_num, 8)
+                reset_world()
+                print("reset to rule #" + str(input_num))
+                break
+            elif event.key == pygame.K_r:
+                reset_world()
+                break
+            elif event.key == pygame.K_h:
+                history += 1
+                print("history screenfulls: " + str(history))
+                
+    for row in range(0, h):
+        for t in range(1, w+1):
+            testee = oneD[t-1:t+2]
+            if testee == [1, 1, 1]:
+                lineOut[t] = rules[0]
+            elif testee == [1, 1, 0]:
+                lineOut[t] = rules[1]
+            elif testee == [1, 0, 1]:
+                lineOut[t] = rules[2]
+            elif testee == [1, 0, 0]:
+                lineOut[t] = rules[3]
+            elif testee == [0, 1, 1]:
+                lineOut[t] = rules[4]
+            elif testee == [0, 1, 0]:
+                lineOut[t] = rules[5]
+            elif testee == [0, 0, 1]:
+                lineOut[t] = rules[6]
+            elif testee == [0, 0, 0]:
+                lineOut[t] = rules[7]
+            else:
+                print("BONKERS")
+                
+        for pixel in range(1, w):
+            if lineOut[pixel] == 1:
+                world.set_at((pixel, h-1), (0, 0, 0))
+            else:
+                world.set_at((pixel, h-1), (255, 255, 255))
         
-            screen.blit(world, (0, 0))
-            pygame.display.update()
+        lineOut[0] = oneD[w]
+        lineOut[w] = oneD[0]
+        oneD = list(lineOut)
+        linecount += 1
         
+         #debug statement
+        #check_randomness(oneD)
+        if is_unique_list(oneD, state, h*history) == False:
+            #print("non-uniq line found drrr")
+            if marker == 0:
+                marker = linecount                
+            scrollinfo = font.render("non-uniqueness found at line: " + str(marker), True, (255, 255, 255))
+            screen.blit(scrollinfo, (w/2-60, h-40))
+            pygame.display.flip()
+            
+        scroll_world()    
+        screen.blit(world, (0, 0))
+        #pygame.display.update()
+            
+        pygame.display.flip()
+    #clock.tick(60)
+    
 pygame.quit()
