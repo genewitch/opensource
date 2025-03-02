@@ -1,4 +1,10 @@
 #!/usr/bin/python3
+#mattermost slashcommand for aprs weather station
+#weatherbot integration. use /wx <STATIONID>
+# this is seemingly pointless; but it works with the
+# postgres aprs mapreduce somewhere in my repo
+
+
 import os
 from bs4 import BeautifulSoup
 from mechanize import Browser
