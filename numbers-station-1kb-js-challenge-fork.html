@@ -11,13 +11,13 @@ h.onaudioprocess=e=>{
 h.connect(g).connect(a.destination);
 const l=n=>((n.match(/[A-Z]/g)||[]).length==1&&(n[0].match(/[A-Z]/g)||[]).length==1);
 setInterval(()=>{
-  s=Object.getOwnPropertyNames(globalThis).filter(l).sort(()=>.5-Math.random())[0];
-  if(Math.random()>.3){
-    n=String(Math.ceil(Math.random()*1e4).toString().padStart(4,'0'));
+  s=Object.getOwnPropertyNames(globalThis).filter(l).sort(()=>.5-r())[0];
+  if(r()>.3){
+    n=String(Math.ceil(r()*1e4).toString().padStart(4,'0'));
     s=n[0]+'. '+n[1]+'. point. '+n[2]+'. '+n[3]+'.';
   }
   m=new SpeechSynthesisUtterance;m.text=s;
-  v=speechSynthesis.getVoices();m.lang=v[(Math.random()*v.length)|0].lang;
-  m.rate=Math.random();m.pitch=Math.random()*2;speechSynthesis.speak(m);
+  v=speechSynthesis.getVoices();m.lang=v[(r()*v.length)|0].lang;
+  m.rate=r();m.pitch=r()*2;speechSynthesis.speak(m);
 },866);
 }}</script></body></html>
