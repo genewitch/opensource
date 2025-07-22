@@ -18,6 +18,6 @@ setInterval(()=>{
   }
   m=new SpeechSynthesisUtterance;m.text=s;
   v=speechSynthesis.getVoices();m.lang=v[(r()*v.length)|0].lang;
-  m.rate=r();m.pitch=r()*2;speechSynthesis.speak(m);
+  m.rate=r()*1.2;m.pitch=r()*2;speechSynthesis.speak(m);
 },866);
 }}</script></body></html>
