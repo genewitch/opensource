@@ -1,7 +1,10 @@
 # opensource code snippets and software  
-contributor/producer  
+contributor/producer (other than repo owner / maintainer): 
 IRC: #gentoo < maolang >  
 I really need to fill this out with more info, i am slack!  
+
+<img width="315" height="267" alt="image" src="https://github.com/user-attachments/assets/a0d3e960-edd8-48f8-a15e-db0fd1f424c2" />
+colorpingpassfail.ps1 added 2026/05/06
 
 ### matrix_DM_prettifier.py  
 download this or git it  
