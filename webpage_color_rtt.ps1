@@ -46,12 +46,12 @@ while ($true) {
                 }
             }
             
-            Write-Host ("PASS | {0,4}ms | {1,2} Bytes" -f $elapsedMs, $byteCount) -ForegroundColor $color
+            Write-Host ("PASS |{0,4}ms |{1,2} Bytes" -f $elapsedMs, $byteCount) -ForegroundColor $color
         } else {
             # Wrong content (treat as failure)
             $failureCount++
             $color = if ($failureCount -eq 1) { "DarkYellow" } else { "Red" }
-            Write-Host ("FAIL |        | {0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
+            Write-Host ("FAIL |       |{0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
             $lastWasProblem = $true
         }
     }
@@ -59,7 +59,7 @@ while ($true) {
         # Network error or timeout
         $failureCount++
         $color = if ($failureCount -eq 1) { "DarkYellow" } else { "Red" }
-        Write-Host ("FAIL |        | {0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
+        Write-Host ("FAIL |       |{0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
         $lastWasProblem = $true
     }
     
