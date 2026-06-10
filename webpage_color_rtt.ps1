@@ -11,7 +11,7 @@ $lastWasProblem = $false    # Tracks if previous line was DarkYellow/Red (failur
 
 Write-Host "Monitoring $url every second. Press Ctrl+C to stop." -ForegroundColor Cyan
 Write-Host ""
-Write-Host "Legend: Green = fast PASS | DarkYellow = slow PASS, 1st FAIL, or recovery | Red = consecutive FAILS" -ForegroundColor DarkGray
+Write-Host "Legend: Green = fast PASS | `nDarkYellow = slow PASS, 1st FAIL, or recovery | `nRed = consecutive FAILS" -ForegroundColor DarkGray
 Write-Host ""
 
 while ($true) {
@@ -51,7 +51,7 @@ while ($true) {
             # Wrong content (treat as failure)
             $failureCount++
             $color = if ($failureCount -eq 1) { "DarkYellow" } else { "Red" }
-            Write-Host ("FAIL |                   | {0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
+            Write-Host ("FAIL |        | {0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
             $lastWasProblem = $true
         }
     }
@@ -59,7 +59,7 @@ while ($true) {
         # Network error or timeout
         $failureCount++
         $color = if ($failureCount -eq 1) { "DarkYellow" } else { "Red" }
-        Write-Host ("FAIL |                   | {0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
+        Write-Host ("FAIL |        | {0,2} time{1}" -f $failureCount, $(if ($failureCount -eq 1) { "" } else { "s" })) -ForegroundColor $color
         $lastWasProblem = $true
     }
     
